@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Homepage from './pages/HomePage';
+import MainPage from './pages/MainPage';
+import Question1 from './pages/Question1';
 import Question2 from './pages/Question2';
 import Navbar from './Navbar'
 import {
@@ -22,7 +23,8 @@ function App() {
     <Navbar/>
       <div id="page-body">
         <Switch>
-          <Route path="/question_1" component={Homepage} exact />
+          <Route path="/" component={MainPage} exact />
+          <Route path="/question_1" component={Question1} exact />
           <Route path="/question_2" component={Question2} exact />
           <Route path="/question_3" component={Question3} exact />
           <Route path="/question_4" component={Question4} exact />

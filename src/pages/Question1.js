@@ -1,6 +1,6 @@
 import React, {  useCallback } from 'react';
 
-const Homepage = () => {
+const Question1 = () => {
 
   const [inputValue, setInputValue] = React.useState("");
   const [countryList, setCountryList] = React.useState("");
@@ -46,4 +46,4 @@ const Homepage = () => {
     );
 }
 
-export default Homepage;
+export default Question1;
