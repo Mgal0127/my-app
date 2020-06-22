@@ -1,23 +1,33 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import HomePage from './pages/HomePage.js';
+import Homepage from './pages/HomePage';
+import Question2 from './pages/Question2';
+import Navbar from './Navbar'
 import {
-  BrowserRouter as Router, 
+  BrowserRouter as Router,
   Route,
-} from 'react-router-dom'
+  Switch,
+} from 'react-router-dom';
+import './App.css';
 
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <Route path="/" component ={HomePage} exact/>
-        </div>
-      </Router>
-    )
-  }
+function App() {
+  return (
+
+    <Router>
+      <div className="App">
+
+    <Navbar/>
+      <div id="page-body">
+        <Switch>
+          <Route path="/question_1" component={Homepage} exact />
+          <Route path="/question_2" component={Question2} exact />
+        </Switch>
+      </div>
+    </div>
+    </Router>
+    
+  );
 }
 
 export default App;

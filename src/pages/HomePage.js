@@ -1,20 +1,45 @@
-import React from 'react';
+import React, {  useCallback, useState, useEffect } from 'react';
 
-var test = 0;
+const Homepage = () => {
+
+  const [inputValue, setInputValue] = React.useState("");
+  const [countryList, setCountryList] = React.useState("");
+  const [flag, setFlag] = React.useState("");
+
+  const handleChange = event => {
+    setInputValue(event.target.value);
+  };
+
+  const sendRequest = useCallback(async () => {
+      const response = await fetch(`http://localhost:8000/api/getCountries/${inputValue}/true`);
+      const body = await response.json();
+      setCountryList(body);
+      setFlag(true);
+  },)
 
 
-const HomePage = () => ( 
+  return (
     <>
-        <h1> Welcome to my Home Page </h1>
-        <br></br>
-        <input></input>
-        <br></br>
-<button id="testing_btn" className="btn btn-default" onClick={getCountry}>Click to search for Country {this.test}</button>
-    </>
-);
+      <h1>Welcome to My New Page</h1>
 
-function getCountry(){
-    test ++;
+      <br></br>
+
+      <input onChange={handleChange}
+        value={inputValue}></input>
+
+      <br></br>
+
+      <button onClick={sendRequest}>Search for Country</button>
+
+      <div className='form-container'>
+        {(flag) ?
+          countryList.map((country, index) => (
+            <li key={index}>{country.name} - Capital City Name: {country.capital}</li>
+          ))
+          : ''}
+      </div>
+    </>
+    );
 }
 
-export default HomePage;
+export default Homepage;
