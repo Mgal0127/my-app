@@ -9,6 +9,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import './App.css';
+import Question3 from './pages/Question3';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route path="/question_1" component={Homepage} exact />
           <Route path="/question_2" component={Question2} exact />
+          <Route path="/question_3" component={Question3} exact />
         </Switch>
       </div>
     </div>
