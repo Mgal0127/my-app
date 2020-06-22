@@ -1,4 +1,4 @@
-import React, {  useCallback, useState, useEffect } from 'react';
+import React, {  useCallback } from 'react';
 
 const Homepage = () => {
 
@@ -20,24 +20,28 @@ const Homepage = () => {
 
   return (
     <>
-      <h1>Welcome to My New Page</h1>
-
+      <h1>Question No. 1</h1>
+      <p>Write a function that connects to https://restcountries.eu/ and gets a unique country from a
+      specific name given using the Node back end and send it to the front end.</p>
       <br></br>
 
       <input onChange={handleChange}
         value={inputValue}></input>
 
       <br></br>
+      <br></br>
 
-      <button onClick={sendRequest}>Search for Country</button>
+      <button type="button" class="btn btn-primary" onClick={sendRequest}>Search for Country</button>
+      
+      <br></br>
+      <br></br>
 
-      <div className='form-container'>
-        {(flag) ?
-          countryList.map((country, index) => (
-            <li key={index}>{country.name} - Capital City Name: {country.capital}</li>
-          ))
-          : ''}
-      </div>
+      {(flag) ?
+            countryList.map((country, index) => (
+                <p>{country.name} with the capital city '{country.capital}'</p>
+
+            ))
+            : ''}
     </>
     );
 }

@@ -20,24 +20,31 @@ const Question2 = () => {
 
   return (
     <>
-      <h1>Welcome to My New Page</h1>
+      <h1>Question No. 2</h1>
+      <p>Using the same API ( https://restcountries.eu/ ), and from an array of string, write a function
+      that returns a list of countries where their name matches at least a part of one of these string
+      use the Node back end and send it to the front end.</p>
 
+      <br></br>
       <br></br>
 
       <input onChange={handleChange}
         value={inputValue}></input>
 
       <br></br>
+      <br></br>
 
-      <button onClick={sendRequest}>Search for Countries</button>
+      <button type="button" class="btn btn-primary" onClick={sendRequest}>Search for Countries</button>
 
-      <div className='form-container'>
-        {(flag) ?
-          countryList.map((country, index) => (
-            <li key={index}>{country.name} - Capital City Name: {country.capital}</li>
-          ))
-          : ''}
-      </div>
+      <br></br>
+      <br></br>
+      
+      {(flag) ?
+            countryList.map((country, index) => (
+                <p>{country.name} with the capital city '{country.capital}'</p>
+
+            ))
+            : ''}
     </>
     );
 }

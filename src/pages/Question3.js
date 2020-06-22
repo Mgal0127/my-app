@@ -1,4 +1,4 @@
-import React, {  useCallback, useEffect} from 'react';
+import React, {  useEffect} from 'react';
 
 const Question3 = () => {
 
@@ -41,22 +41,39 @@ const Question3 = () => {
 
   return (
     <>
-      <h1>Welcome to My New Page</h1>
-
+        <h1>Question No. 3</h1>
+      <p>Using the same API ( https://restcountries.eu/ ) in the React front end list all the countries
+        and a field to filter the country by name.</p>
+      
+      <br></br>
       <br></br>
 
       <input onChange={handleChange}
         value={searchField}></input>
 
       <br></br>
+      <br></br>
 
-      <div className='form-container'>
-      {(flag) ?
-          countryList.map((country, index) => (
-            <li key={index}>{country.name} - Capital City Name: {country.capital}</li>
-          ))
-          : ''}
-      </div>
+      <table>
+        <thead>
+            <tr>
+                <th>Country Name</th>
+                <th>Capital City</th>
+            </tr>
+        </thead>
+        <tbody>
+            {(flag) ?
+            countryList.map((country, index) => (
+                <tr>
+                    <td>{country.name}</td>
+                    <td>{country.capital}</td>
+                </tr>
+
+            ))
+            : ''}
+        </tbody>
+      </table>
+      
     </>
     );
 }
