@@ -8,52 +8,44 @@ const Question4 = () => {
     const [flag, setFlag] = React.useState("");
 
     const reel_1 = ['cherry', 'lemon', 'apple', 'lemon', 'banana', 'banana', 'lemon', 'lemon'];
-    const reel_2 = ['lemon', 'apple', 'lemon', 'lemon', 'cherry', 'apple', 'banana', 'lemon']
+    const reel_2 = ['lemon', 'apple', 'lemon', 'lemon', 'cherry', 'apple', 'banana', 'lemon'];
     const reel_3 = ['lemon', 'apple', 'lemon', 'apple', 'cherry', 'lemon', 'banana', 'lemon'];
 
     const [user_coins, setCoins] = React.useState(20);
 
     useEffect(() => {
-        let spinned = 0; 
+        let spinned = user_coins; 
 
         if(flag){
             const result = first_reel + '-' + second_reel + '-' + third_reel;
             switch (result){
                 case 'cherry-cherry-cherry':
-                    spinned = (user_coins + 50); 
-                    console.log(spinned)
-
+                    spinned += 50; 
                     setCoins(spinned);
                     break;
                 case 'apple-apple-apple':
-                    spinned = (user_coins + 20); 
-                    console.log(spinned)
-
+                    spinned += 20; 
                     setCoins(spinned);
                     break;
                 case 'banana-banana-banana':
-                    spinned = (user_coins + 15); 
-
-                    console.log(spinned)
-
+                    spinned += 15; 
                     setCoins(spinned);
                     break;
                 case 'lemon-lemon-lemon':
-                    spinned = (user_coins + 3); 
-                    console.log(spinned)
-
+                    spinned += 3; 
                     setCoins(spinned);
                     break;
                 default:
                     checkOtherCombinations(result);
+                }
+                setFlag(false);
 
-                }
-                }
+            }
         
-    }, [flag]);
+    }, [flag, user_coins]);
     
-  const spinReels = useCallback(async () => {
-    let spinned = user_coins - 1; 
+  function spinReels () {
+    let spinned = (user_coins === 0 ? user_coins : user_coins - 1); 
     setCoins(spinned);
     const min = 0;
     const max = 7;
@@ -72,25 +64,24 @@ const Question4 = () => {
                 setThird(reel_3[rand]);
                 setFlag(true);
                 break;
+            default:
+                break;
         }
     }
-  },)
+  }
 
-  const checkOtherCombinations = (result) => {
-      console.log('OTHER')
-      let spinned = 0
-      if(result.includes('banana-banana')){
-        spinned = user_coins + 40; 
-        setCoins(spinned);
+  function checkOtherCombinations (result) {
+    let spinned = user_coins;
+    if(result.includes('banana-banana')){
+      spinned += 5; 
+    }else if(result.includes('cherry-cherry')){
+      spinned += 40; 
+    }else if(result.includes('apple-apple')){
+      spinned += 10; 
+    }
 
-      }else if(result.includes('cherry-cherry')){
-        spinned = user_coins + 10; 
-        setCoins(spinned);
-      }else if(result.includes('apple=apple')){
-        spinned = user_coins + 5; 
-        setCoins(spinned);
-      }
-  };
+    setCoins(spinned);
+  } 
 
   return (
     <>
@@ -116,10 +107,10 @@ const Question4 = () => {
       <br></br>
       <br></br>
 
-  <button class="btn btn-info" disabled> Coin Total: {user_coins}</button>
+  <button className="btn btn-info" disabled> Coin Total: {user_coins}</button>
       <br></br> <br></br>
 
-      <button type="button" class="btn btn-primary"  onClick={spinReels}>Spin for coins !</button>
+      <button type="button" className="btn btn-primary"  onClick={spinReels}>Spin for coins !</button>
 
 
         <br>
@@ -127,18 +118,18 @@ const Question4 = () => {
         <br>
         </br>
 
-        <div class="row">
-            <div class="column" >
+        <div className="row">
+            <div className="column" >
                 <h2>FIRST</h2>
-                <button class="btn btn-warning" disabled>{first_reel}</button>
+                <button className="btn btn-warning" disabled>{first_reel}</button>
             </div>
-            <div class="column">
+            <div className="column">
                 <h2>SECOND</h2>
-                <button class="btn btn-danger" disabled>{second_reel}</button>
+                <button className="btn btn-danger" disabled>{second_reel}</button>
             </div>  
-            <div class="column">
+            <div className="column">
                 <h2>THIRD</h2>
-                <button class="btn btn-success" disabled>{third_reel}</button>
+                <button className="btn btn-success" disabled>{third_reel}</button>
             </div>  
         </div>
         

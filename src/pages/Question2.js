@@ -1,21 +1,30 @@
-import React, {  useCallback} from 'react';
+import React, {  useEffect} from 'react';
 
 const Question2 = () => {
 
   const [inputValue, setInputValue] = React.useState("");
-  const [countryList, setCountryList] = React.useState("");
-  const [flag, setFlag] = React.useState("");
+  const [countryList, setCountryList] = React.useState([]);
 
   const handleChange = event => {
     setInputValue(event.target.value);
   };
 
-  const sendRequest = useCallback(async () => {
-      const response = await fetch(`http://localhost:8000/api/getCountries/${inputValue}/false`);
-      const body = await response.json();
-      setCountryList(body);
-      setFlag(true);
-  },)
+  useEffect(() => {
+    async function fetchData() {
+      if(inputValue.trim() !== ""){
+        const response = await fetch(`http://localhost:8000/api/getCountries/${inputValue}/false`);
+        const body = await response.json();
+        if(body.status === 404){
+          setCountryList([]);
+        }else{
+          setCountryList(body);
+        }
+      }else{
+        setCountryList([]);
+      }
+    }
+    fetchData();
+  }, [inputValue]);
 
 
   return (
@@ -28,23 +37,26 @@ const Question2 = () => {
       <br></br>
       <br></br>
 
-      <input onChange={handleChange}
-        value={inputValue}></input>
+      <input onChange={handleChange} value={inputValue}></input>
 
       <br></br>
       <br></br>
 
-      <button type="button" class="btn btn-primary" onClick={sendRequest}>Search for Countries</button>
-
-      <br></br>
-      <br></br>
-      
-      {(flag) ?
+      <table className="table custom-table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">Country</th>
+            <th scope="col">Capital City</th>
+          </tr>
+        </thead>
+        <tbody>
+          {(countryList.length > 0) ?
             countryList.map((country, index) => (
-                <p>{country.name} with the capital city '{country.capital}'</p>
-
+              <tr key={index}><td>{country.name}</td><td>{country.capital}</td></tr>
             ))
-            : ''}
+            : <tr><td></td><td></td></tr>}
+        </tbody>
+      </table>
     </>
     );
 }

@@ -264,3 +264,7 @@ nav a:hover {
   display: table;
   clear: both;
 }
+
+.custom-table {
+  table-layout: fixed;
+}
